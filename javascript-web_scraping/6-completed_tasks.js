@@ -1,11 +1,11 @@
- #!/usr/bin/node
-
+#!/usr/bin/node
+// 6-completed_tasks.js
 
 const request = require('request');
 
 const apiUrl = process.argv[2];
 
-request.get(apiUrl, (error, response, body) => {
+request(apiUrl, (error, response, body) => {
   if (error) {
     console.error(error);
     return;
@@ -18,19 +18,18 @@ request.get(apiUrl, (error, response, body) => {
 
   try {
     const todos = JSON.parse(body);
-    const completedByUser = {};
+    const completedTasks = {};
 
     todos.forEach((todo) => {
       if (todo.completed) {
-        completedByUser[todo.userId] = (completedByUser[todo.userId] || 0) + 1;
+        const { userId } = todo;
+        completedTasks[userId] = (completedTasks[userId] || 0) + 1;
       }
     });
 
-    
-    Object.entries(completedByUser).forEach(([userId, count]) => {
-      console.log(`User ${userId}: ${count} completed task(s)`);
-    });
-  } catch (parseError) {
-    console.error('Error parsing JSON:', parseError);
+    console.log(completedTasks);
+  } catch (err) {
+    console.error('Error parsing JSON:', err);
   }
 });
+
