@@ -1,5 +1,5 @@
 #!/usr/bin/node
-// count_wedge_antilles.js
+
 
 const request = require('request');
 
@@ -21,7 +21,7 @@ request.get(apiUrl, (error, response, body) => {
     const data = JSON.parse(body);
     const films = data.results;
 
-    // Count films where Wedge Antilles appears
+    
     const count = films.reduce((acc, film) => {
       if (film.characters.includes(wedgeId)) {
         return acc + 1;
