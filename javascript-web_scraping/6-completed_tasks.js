@@ -1,5 +1,5 @@
  #!/usr/bin/node
-// count_completed_tasks.js
+
 
 const request = require('request');
 
@@ -26,7 +26,7 @@ request.get(apiUrl, (error, response, body) => {
       }
     });
 
-    // Print only users with completed tasks
+    
     Object.entries(completedByUser).forEach(([userId, count]) => {
       console.log(`User ${userId}: ${count} completed task(s)`);
     });
